@@ -19,7 +19,7 @@
 </head>
 <body>
 <div class="container">
-    <tags:headerLogin cart="${cart}" isCartAvailable="false"/>
+    <tags:headerLogin isCartAvailable="false"/>
     <h1>
         <spring:message code="titlePage.orderOverview"/>
     </h1>
