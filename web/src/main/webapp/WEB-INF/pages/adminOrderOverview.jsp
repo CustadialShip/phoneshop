@@ -19,7 +19,7 @@
 </head>
 <body>
 <div class="container">
-    <tags:headerLogout isCartAvailable="false" userName="admin"/>
+    <tags:headerLogin isCartAvailable="false"/>
     <br>
     <div class="row">
         <div class="col col-md-4">
