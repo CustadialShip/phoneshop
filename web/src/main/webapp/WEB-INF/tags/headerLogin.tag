@@ -5,6 +5,7 @@
 <%@ attribute name="cart" required="false" type="com.es.core.model.cart.Cart" %>
 <%@attribute name="isCartAvailable" required="true" type="java.lang.Boolean" %>
 <div class="row">
+    <a href="${pageContext.servletContext.contextPath}/quickCart">Quick add to cart</a>
     <sec:authorize access="!isAuthenticated()">
         <div class="col col-md-11"></div>
         <div class="col col-md-1">

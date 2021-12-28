@@ -36,6 +36,7 @@ public class JdbcPhoneDao implements PhoneDao {
     public static final String LIMIT = " limit ";
     public static final String ORDER_BY = " order by ";
     public static final String OFFSET = " offset ";
+    public static final String SELECT_FROM_PHONES_WHERE_MODEL = "select * from phones where model=?";
 
     @Resource
     private JdbcTemplate jdbcTemplate;
@@ -51,6 +52,16 @@ public class JdbcPhoneDao implements PhoneDao {
             throw new PhoneNotFindException(key);
         }
         phone.ifPresent(value -> value.setColors(colorSet));
+        return phone;
+    }
+
+    public Optional<Phone> getPhoneByModel(String model){
+        Optional<Phone> phone =
+                jdbcTemplate.query(SELECT_FROM_PHONES_WHERE_MODEL, new Object[]{model},
+                        new PhoneRowMapper()).stream().findAny();
+        if(phone.isEmpty()){
+            throw new PhoneNotFindException(model);
+        }
         return phone;
     }
 

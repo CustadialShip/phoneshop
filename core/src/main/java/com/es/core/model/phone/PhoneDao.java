@@ -16,4 +16,5 @@ public interface PhoneDao {
     Optional<Color> getColor(Long key);
     Set<Color> getColorsByPhoneId(Long key);
     Optional<Stock> getStock(Long key);
+    Optional<Phone> getPhoneByModel(String model);
 }
