@@ -28,55 +28,59 @@
             <h1>
                 <spring:message code="titlePage.quickOrder"/>
             </h1>
+            <div class="text-danger small">
+                <c:if test="${not empty errorMessage}">
+                    ${errorMessage}
+                </c:if>
+            </div>
+            <div class="text-success small">
+                <c:if test="${not empty errorMessage}">
+                    <c:forEach var="successMessage" items="${successMessageList}">
+                        ${successMessage}
+                    </c:forEach>
+                </c:if>
+            </div>
         </div>
     </div>
     <br>
     <%--Info table--%>
     <div class="row">
-        <div class="col border col-md-5 bg-light">
-            <spring:message code="titleTable.productCode"/>
-        </div>
         <div class="col border col-md-5">
-            <spring:message code="titleTable.quantity"/>
+            <h4>
+                <spring:message code="titleTable.quantity"/>
+            </h4>
+        </div>
+        <div class="col border col-md-5 bg-light">
+            <h4>
+                <spring:message code="titleTable.productCode"/>
+            </h4>
         </div>
     </div>
     <form:form action="${pageContext.servletContext.contextPath}/quickCart" method="post"
-               modelAttribute="quickQuantityForm" id="quickQuantityForm">
-        <div class="row">
-            <div class="col col-md-5">
-                <form:input path="model" form="quickQuantityForm" value="${quickQuantityForm.model}"/>
-                <br>
-                <form:errors path="model" style="color: red; font-size: small"/>
+               modelAttribute="quickUpdateCartRequest">
+        <c:forEach var="id" begin="0" end="10">
+            <div class="row">
+                <div class="col border col-md-5 bg-light">
+                    <input type="hidden" name="model">
+                    <form:input path="quantityFormList[${id}].model"
+                                value="${quickUpdateCartRequest.quantityFormList[id].model}" cssClass="form-control"/>
+                    <form:errors path="quantityFormList[${id}].model"
+                                 value="${quickUpdateCartRequest.quantityFormList[id].model}"
+                                 cssClass="text-danger small"/>
+                </div>
+                <div class="col border col-md-5">
+                    <form:input path="quantityFormList[${id}].quantity"
+                                value="${quickUpdateCartRequest.quantityFormList[id].quantity}"
+                                cssClass="form-control"/>
+                    <form:errors path="quantityFormList[${id}].quantity"
+                                 value="${quickUpdateCartRequest.quantityFormList[id].quantity}"
+                                 cssClass="text-danger small"/>
+                </div>
             </div>
-            <div class="col col-md-5">
-                <form:input path="quantity" form="quickQuantityForm" value="${quickQuantityForm.quantity}"/>
-                <br>
-                <form:errors path="quantity" style="color: red; font-size: small"/>
-            </div>
-            <div class="col col-md-1">
-                <input type="submit" value="Add to cart" class="btn btn-outline-secondary" form="quickQuantityForm"/>
-            </div>
-        </div>
+        </c:forEach>
+        <br>
+        <input type="submit" class="btn btn-secondary" value="Add to cart"/>
     </form:form>
-
-
-<%--    <form:form action="${pageContext.servletContext.contextPath}/quickCart/mult" method="post"--%>
-<%--               modelAttribute="quickUpdateCartRequest" id="formMap">--%>
-<%--            <c:forEach var="map" items="item" varStatus="status">--%>
-<%--                <div class="row">--%>
-<%--                    <div class="col border col-md-5 bg-light">--%>
-<%--                        <input type="hidden" name="model">--%>
-<%--                        <form:input path="quickUpdateCartRequest[${status.index}].model" form="formMap"/>--%>
-<%--                        <form:errors path="quickUpdateCartRequest[${status.index}].model"/>--%>
-<%--                    </div>--%>
-<%--                    <div class="col border col-md-5">--%>
-<%--                        <form:input path="quickUpdateCartRequest[${status.index}].quantity" form="formMap"/>--%>
-<%--                        <form:errors path="quickUpdateCartRequest[${status.index}].quantity"/>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
-<%--                <button>Add to cart</button>--%>
-<%--            </c:forEach>--%>
-<%--    </form:form>--%>
 </div>
 
 

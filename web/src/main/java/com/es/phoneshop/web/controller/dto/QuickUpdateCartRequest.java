@@ -1,29 +1,21 @@
 package com.es.phoneshop.web.controller.dto;
 
 import javax.validation.Valid;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 public class QuickUpdateCartRequest {
-    @Valid
-    Map<String, QuickQuantityForm> quickQuantityFormList;
+    List<@Valid QuickQuantityForm> quickQuantityFormList;
 
     public QuickUpdateCartRequest() {
-        quickQuantityFormList = new HashMap<>();
+        quickQuantityFormList = new ArrayList<>();
     }
 
-    public QuickUpdateCartRequest(int size) {
-        quickQuantityFormList = new HashMap<>();
-        for(int i = 0; i < size; i++){
-            quickQuantityFormList.put(String.valueOf(i), new QuickQuantityForm());
-        }
-    }
-
-    public Map<String, QuickQuantityForm> getQuantityFormList() {
+    public List<QuickQuantityForm> getQuantityFormList() {
         return quickQuantityFormList;
     }
 
-    public void setQuantityFormList(Map<String, QuickQuantityForm> quantityFormList) {
+    public void setQuantityFormList(List<QuickQuantityForm> quantityFormList) {
         this.quickQuantityFormList = quantityFormList;
     }
 }

@@ -62,6 +62,8 @@ public class JdbcPhoneDao implements PhoneDao {
         if(phone.isEmpty()){
             throw new PhoneNotFindException(model);
         }
+        Set<Color> colorSet = getColorsByPhoneId(phone.get().getId());
+        phone.ifPresent(value -> value.setColors(colorSet));
         return phone;
     }
 
