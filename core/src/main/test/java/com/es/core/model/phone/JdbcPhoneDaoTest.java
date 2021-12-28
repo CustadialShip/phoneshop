@@ -5,22 +5,13 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
+import static org.junit.Assert.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@Transactional
 @ContextConfiguration(value = "/context/testContext-core.xml")
 public class JdbcPhoneDaoTest {
     @Resource
@@ -73,7 +64,7 @@ public class JdbcPhoneDaoTest {
 
     @Test
     public void shouldFindAll() {
-        List<Phone> phoneListExpected = phoneDao.findAll(2, 2);
+        List<Phone> phoneListExpected = phoneDao.findAll(1, 2);
         List<Phone> phoneListActual = new ArrayList<>();
         if (phoneDao.get(1000L).isPresent() && phoneDao.get(1001L).isPresent()) {
             phoneListActual.add(phoneDao.get(EXISTING_PHONE_ID_2).get());
